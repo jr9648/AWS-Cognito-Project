@@ -1,0 +1,29 @@
+To restrict API methods in API Gateway using Cognito in AWS, you can follow these steps:
+
+1. Set up Cognito User Pool: Create a Cognito User Pool in AWS. This user pool will manage the authentication and authorization of your users.
+
+2. Create an API Gateway API: Create an API Gateway API and define the resources and methods that you want to restrict.
+
+3. Set up Authorizers: Configure an authorizer for your API methods. In this case, you'll use Cognito as the authorizer.
+
+   a. Open the API Gateway console and navigate to your API.
+   b. Under your API, go to the "Authorizers" section.
+   c. Click on "Create New Authorizer" and provide a name for your authorizer.
+   d. Select "Cognito" as the type.
+   e. Choose your Cognito User Pool from the dropdown list.
+   f. Configure any additional settings you require, such as token validation.
+   g. Save the authorizer.
+
+4. Configure API methods: Now, you can configure each API method to use the Cognito authorizer you created.
+
+   a. In the API Gateway console, go to your API.
+   b. Navigate to the desired resource and method you want to restrict.
+   c. Under the method settings, go to the "Method Request" section.
+   d. In the "Settings" tab, select the Cognito authorizer you created from the "Authorization" dropdown.
+   e. Save the method settings.
+
+5. Test the API: Now, when a user tries to access the restricted API method, they will need to provide valid Cognito user credentials. If they are authenticated and authorized, they will be able to access the method. Otherwise, they will receive an authorization error.
+
+Remember to properly configure your Cognito User Pool's user groups and assign appropriate permissions to the user groups. This will enable you to control access to different API methods based on user group membership.
+
+By following these steps, you can restrict API methods in API Gateway using Cognito for authentication and authorization.
