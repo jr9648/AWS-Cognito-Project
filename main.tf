@@ -218,3 +218,37 @@ module "product_api_gateway" {
   stage_name = "dev"
   stage_auto_deploy = true
 }
+
+    #------------------------------------------------------
+
+variable "user_pool_name" {
+  description = "Name of the Cognito User Pool"
+  default     = "my-user-pool"
+}
+
+variable "admin_group_name" {
+  description = "Name of the Cognito admin user group"
+  default     = "AdminUser"
+}
+
+variable "standard_group_name" {
+  description = "Name of the Cognito standard user group"
+  default     = "StandardUser"
+}
+
+module "cognito" {
+  source = "./tf-modules/cognito"
+
+  user_pool_name     = var.user_pool_name
+  admin_group_name   = var.admin_group_name
+  standard_group_name = var.standard_group_name
+}
+
+module "api_gateway_endpoints" {
+  source = "./tf-modules/restricting-api-methods"
+
+  api_name               = "my-api"
+  cognito_user_pool_id   = "your-cognito-user-pool-id"
+  admin_group_name       = "AdminUsers"
+  standard_group_name    = "StandardUsers"
+}
