@@ -218,3 +218,7 @@ module "product_api_gateway" {
   stage_name = "dev"
   stage_auto_deploy = true
 }
+
+module "cognito" {
+  source = "./tf-modules/cognito"
+}
